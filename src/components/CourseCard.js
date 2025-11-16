@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import ProgressPill from './ProgressPill';
 import { motion } from 'framer-motion';

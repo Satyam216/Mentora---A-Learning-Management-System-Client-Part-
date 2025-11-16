@@ -1,19 +1,17 @@
+// src/app/page.js (Server Component)
 import LandingHero from '@/components/LandingHero';
-import { supabase } from '@/lib/supabase';
-import { cookies } from 'next/headers';
 
 export default function Home() {
   return (
     <div>
       <LandingHero />
-      <section className="max-w-6xl mx-auto py-8">
-        <h2 className="text-2xl font-semibold">Popular Courses</h2>
-        {/* show a few featured cards - lightweight fetch from API via client */}
-        <div className="grid md:grid-cols-3 gap-6 mt-4">
-          {/* we'll fetch on /courses page; here show placeholders */}
-          <div className="card">Featured course 1</div>
-          <div className="card">Featured course 2</div>
-          <div className="card">Featured course 3</div>
+      <section className="max-w-6xl mx-auto py-10">
+        <h2 className="text-2xl font-semibold">Popular categories</h2>
+        <div className="mt-6 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="card">Web Development</div>
+          <div className="card">Data Science</div>
+          <div className="card">DevOps</div>
+          <div className="card">AI/ML</div>
         </div>
       </section>
     </div>
