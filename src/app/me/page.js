@@ -2,19 +2,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { useSession } from '@/hooks/useSession';
-import Protected from '@/components/Protected';
 
 export default function Me() {
   const { user } = useSession();
-  const { data } = useQuery({
-    queryKey: ['me', user?.id],
-    queryFn: async () => (await api.get(`/auth/profile`)).data,
-    enabled: !!user?.id
-  });
+  const { data } = useQuery(['me'], async () => (await api.get('/auth/profile')).data, { enabled: !!user });
 
   return (
-    <Protected>
-      <pre className="p-4 border rounded">{JSON.stringify({ user, profile: data }, null, 2)}</pre>
-    </Protected>
+    <div className="max-w-4xl mx-auto py-8">
+      <h1 className="text-2xl font-bold">Profile</h1>
+      <div className="mt-4 card">
+        <pre>{JSON.stringify(data || user, null, 2)}</pre>
+      </div>
+    </div>
   );
 }

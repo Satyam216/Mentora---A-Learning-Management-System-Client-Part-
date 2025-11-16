@@ -1,35 +1,18 @@
 'use client';
-import Protected from '@/components/Protected';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 
-export default function Admin() {
-  const { data } = useQuery({
-    queryKey: ['admin-stats'],
-    queryFn: async () => (await api.get('/admin/stats')).data
-  });
-
+export default function AdminDashboard() {
+  const { data } = useQuery(['admin-stats'], async () => (await api.get('/admin/stats')).data);
   return (
-    <Protected>
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {data ? (
-          <>
-            <Card label="Users" value={data.users ?? 0} />
-            <Card label="Courses" value={data.courses ?? 0} />
-            <Card label="Enrollments" value={data.enrollments ?? 0} />
-            <Card label="Payments" value={data.payments ?? 0} />
-          </>
-        ) : <div>Loading...</div>}
+    <div className="max-w-6xl mx-auto py-8">
+      <h1 className="text-2xl font-bold">Admin</h1>
+      <div className="mt-6 grid md:grid-cols-4 gap-4">
+        <div className="card"><div className="text-sm">Users</div><div className="text-2xl font-bold">{data?.users ?? 0}</div></div>
+        <div className="card"><div className="text-sm">Courses</div><div className="text-2xl font-bold">{data?.courses ?? 0}</div></div>
+        <div className="card"><div className="text-sm">Enrollments</div><div className="text-2xl font-bold">{data?.enrollments ?? 0}</div></div>
+        <div className="card"><div className="text-sm">Payments</div><div className="text-2xl font-bold">{data?.payments ?? 0}</div></div>
       </div>
-    </Protected>
-  );
-}
-
-function Card({ label, value }) {
-  return (
-    <div className="border rounded-xl p-4">
-      <div className="text-sm text-gray-600">{label}</div>
-      <div className="text-2xl font-bold">{value}</div>
     </div>
   );
 }

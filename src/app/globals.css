@@ -4,50 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* custom palette variables */
-:root{
-  --bg: #f7fbff;            /* very light blue */
-  --card: #ffffff;          /* white */
-  --accent: #2b8ef6;        /* light blue primary */
-  --accent-600: #1068c6;    /* darker blue */
-  --muted: #6b7280;         /* gray */
-  --success: #10b981;       /* green */
-  --yellow: #facc15;        /* yellow */
-}
+html,body,#__next { height: 100%; }
+body { @apply bg-white text-slate-900 antialiased; }
 
-/* body */
-html,body,#root,#__next { height:100%; }
-body {
-  background: linear-gradient(180deg, var(--bg), #eff8ff);
-  color: #0f172a;
-  -webkit-font-smoothing:antialiased;
-}
+/* subtle shadow card */
+.card { @apply bg-white rounded-2xl shadow-sm p-4; }
 
-/* subtle card */
-.card {
-  background: var(--card);
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(15,23,42,0.06);
-}
-
-/* small helpers */
-.btn {
-  @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium;
-}
-.btn-primary {
-  background: var(--accent);
-  color: white;
-}
-.btn-ghost {
-  background: transparent;
-  color: var(--accent-600);
-}
-
-/* responsive container */
-.container {
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
+/* smooth image cover */
+.cover-img { object-fit: cover; }

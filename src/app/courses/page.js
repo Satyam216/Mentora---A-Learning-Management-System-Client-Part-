@@ -1,25 +1,23 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
-import Link from 'next/link';
+import CourseCard from '@/components/CourseCard';
 
 export default function Courses() {
-  const { data } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['courses'],
-    queryFn: async () => (await api.get('/courses')).data
+    queryFn: async () => (await api.get('/courses')).data,
   });
 
-  if (!data) return <div>Loading...</div>;
+  if (isLoading) return <div className="p-6">Loading courses...</div>;
+  if (error) return <div className="p-6 text-red-500">Error loading courses</div>;
 
   return (
-    <div className="grid md:grid-cols-3 gap-4">
-      {data.map(c => (
-        <Link key={c.id} href={`/courses/${c.id}`} className="border rounded-xl p-4 hover:shadow">
-          <div className="aspect-video bg-gray-100 rounded mb-3" />
-          <div className="font-semibold">{c.title}</div>
-          <div className="text-sm text-gray-600 line-clamp-2">{c.description}</div>
-        </Link>
-      ))}
+    <div className="max-w-6xl mx-auto py-8">
+      <h1 className="text-2xl font-bold">All Courses</h1>
+      <div className="grid md:grid-cols-3 gap-6 mt-6">
+        {data?.map(c => <CourseCard key={c.id} course={c} />)}
+      </div>
     </div>
   );
 }
