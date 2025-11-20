@@ -4,8 +4,12 @@ import ReactQueryProvider from '@/lib/queryClient';
 import Navbar from '@/components/Navbar';
 import ClientIdleWrapper from '@/components/ClientIdleWrapper';
 import Footer from '@/components/Footer';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
 
-export const metadata = { title: 'LMS', description: 'Online Learning Platform' };
+
+export const metadata = { title: 'Mentora', description: 'Online Learning Platform' };
 
 export default function RootLayout({ children }) {
   return (
